@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MainCharacter\mainCharactermoov.cs" />
+    <Compile Include="Assets\MainCharacter\DeplacementPointAndClick.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
