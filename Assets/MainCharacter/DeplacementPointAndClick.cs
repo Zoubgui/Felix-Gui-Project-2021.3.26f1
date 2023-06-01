@@ -6,23 +6,51 @@ using UnityEngine.AI;
 public class DeplacementPointAndClick : MonoBehaviour
 {
     public Camera cam; // Référence à la caméra
+    public Transform camPosition;
     public NavMeshAgent agent; // Référence à l'agent de navigation
     public LayerMask groundLayer; // Couche du sol
+    public bool isSelected = false;
+    bool rayCast;
+    private Vector3 mousePosition;
 
-    // Fonction appelée à chaque frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) // Vérifie si le bouton gauche de la souris est enfoncé
+        Debug.Log(rayCast);
+
+        mousePosition = Input.mousePosition;
+        Ray ray = cam.ScreenPointToRay(mousePosition); // Crée un rayon à partir de la position de la souris
+        RaycastHit hit;   // Variable pour stocker les informations sur l'intersection avec le sol
+        rayCast = Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer);
+
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition); // Crée un rayon à partir de la position de la souris
-
-            RaycastHit hit; // Variable pour stocker les informations sur l'intersection avec le sol
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer)) // Lance un rayon et vérifie s'il intersecte le sol
-            {
-                agent.SetDestination(hit.point); // Définit la destination de l'agent de navigation sur le point d'intersection
-            }
+            isSelected = true;
         }
-    }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            isSelected = false;
+            agent.destination = gameObject.transform.localPosition;
+        }
+
+        if (rayCast == false)
+        {
+            agent.destination = gameObject.transform.localPosition;
+        }
+
+        if (isSelected && rayCast)
+        {
+            Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer); // Lance un rayon et vérifie s'il intersecte le sol
+            agent.SetDestination(hit.point); // Définit la destination de l'agent de navigation sur le point d'intersection
+        }
+
+       
+
+
+   
+
+      
+
+}
 }
 

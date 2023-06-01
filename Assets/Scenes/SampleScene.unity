@@ -392,7 +392,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.2401611, y: -0.2901271, z: 0.075466745, w: 0.92328423}
-  m_LocalPosition: {x: 10.33, y: 6.4, z: -10}
+  m_LocalPosition: {x: 14.82, y: 20.97, z: -16.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -490,10 +490,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 963194227}
+  camPosition: {fileID: 1259219377262151105}
   agent: {fileID: 1259219377262151101}
   groundLayer:
     serializedVersion: 2
     m_Bits: 4294967295
+  isSelected: 0
+  rayCast: 0
 --- !u!195 &1259219377262151101
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -516,3 +519,8 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!4 &1259219377262151105 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3812835757279315911, guid: d3ddb5d7e3aae6545b4a8bc159a68700, type: 3}
+  m_PrefabInstance: {fileID: 1259219377262151092}
+  m_PrefabAsset: {fileID: 0}
