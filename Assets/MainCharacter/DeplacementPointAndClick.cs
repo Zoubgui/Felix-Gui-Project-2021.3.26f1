@@ -6,21 +6,23 @@ using UnityEngine.AI;
 public class DeplacementPointAndClick : MonoBehaviour
 {
     public Camera cam; // Référence à la caméra
-    public Transform camPosition;
     public NavMeshAgent agent; // Référence à l'agent de navigation
     public LayerMask groundLayer; // Couche du sol
     public bool isSelected = false;
     bool rayCast;
     private Vector3 mousePosition;
+    public GameObject fire;
 
+    
     void Update()
     {
-        Debug.Log(rayCast);
+        Debug.DrawLine(transform.position, Vector3.back);
 
         mousePosition = Input.mousePosition;
         Ray ray = cam.ScreenPointToRay(mousePosition); // Crée un rayon à partir de la position de la souris
         RaycastHit hit;   // Variable pour stocker les informations sur l'intersection avec le sol
         rayCast = Physics.Raycast(ray, out hit, Mathf.Infinity, groundLayer);
+        agent.SetDestination(gameObject.transform.position);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -44,13 +46,23 @@ public class DeplacementPointAndClick : MonoBehaviour
             agent.SetDestination(hit.point); // Définit la destination de l'agent de navigation sur le point d'intersection
         }
 
+        //attack
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            fire.SetActive(true);
+
+        }
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            fire.SetActive(false);
+            Debug.Log("Attack");
+
+        }
+
        
 
-
-   
-
-      
-
-}
+    }
 }
 
